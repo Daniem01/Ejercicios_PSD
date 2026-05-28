@@ -12,7 +12,7 @@ El repositorio está estructurado en base a las principales tecnologías de sist
 
 ### 🔌 1. Sockets
 Comunicación a bajo nivel mediante el paso de mensajes utilizando el API de Sockets (TCP/UDP) bajo el estándar POSIX.
-*   ✅ **[Numeros](./Sockets/Numeros):** [AÑADE AQUÍ UNA BREVE DESCRIPCIÓN: p.ej. Arquitectura cliente-servidor para el intercambio y procesamiento de números enteros].
+*   ✅ **[Numeros](./Sockets/Numeros):**
 *   ⏳ *Más ejercicios en desarrollo...*
 
 ### 🛠️ 2. RPC (Remote Procedure Call)
