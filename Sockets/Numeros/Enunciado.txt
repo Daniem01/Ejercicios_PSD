@@ -1,0 +1,94 @@
+Enunciado del Ejercicio: Sockets
+Se pide implementar un programa cliente-servidor utilizando sockets en lenguaje C. La parte servidor recibirá nombres (cadenas de texto) de los clientes. Este programa, además, llevará la cuenta de los nombres repetidos. Consideramos que un nombre enviado por un cliente es repetido, cuando ese mismo nombre lo ha enviado un cliente al servidor durante las MAX_NAMES conexiones anteriores.
+
+Las bibliotecas necesarias, tipos de datos y la definición de los códigos se encuentran en el fichero types.h al final de este enunciado.
+
+Cada cliente se conectará con el servidor y enviará un nombre (cadena de texto) que recibe como parámetro al ejecutar la aplicación. Una vez enviado el nombre, el cliente recibirá el código REPE, si la cadena enviada está repetida. En otro caso, recibirá el código NO_REPE. Una vez que la aplicación cliente haya recibido el código del servidor, mostrará un mensaje indicando el resultado obtenido y cerrará la conexión con el mismo.
+
+La forma de ejecutar la aplicación cliente se detalla a continuación:
+
+./client serverIP serverPort name
+
+donde:
+
+client es el ejecutable de la aplicación cliente.
+
+serverIP es la IP del equipo donde se ejecuta la aplicación servidor.
+
+serverPort es el puerto donde escucha peticiones el servidor.
+
+name es una cadena de texto, sin espacios, que deberá mandarse al servidor.
+
+La aplicación servidor recibirá de forma indefinida nombres por parte de los clientes. La recepción de datos deberá realizarse en paralelo. Una vez recibida la información de cada cliente, se actualizarán los datos correspondientes y se mostrará por pantalla el nombre recibido y el número total de nombres repetidos desde el inicio de la ejecución del programa. Seguidamente, se enviará el código correspondiente al cliente y se cerrará la comunicación con el mismo.
+
+La forma de ejecutar la aplicación servidor se detalla a continuación:
+
+./server port
+
+donde:
+
+server es el ejecutable de la aplicación servidor.
+
+port es el puerto donde escucha peticiones la aplicación servidor.
+
+Consideraciones de implementación:
+Los nombres son cadenas de texto sin espacios.
+
+Para el envío y recepción de los códigos se pueden utilizar números enteros.
+
+El servidor debe ejecutarse indefinidamente.
+
+El servidor debe procesar peticiones de los clientes de forma paralela.
+
+Cuando el cliente reciba el código con el resultado correspondiente, deberá cerrar la conexión con el servidor.
+
+Cada vez que un cliente envíe un nombre al servidor, deberá establecer conexión con el mismo, es decir, no se permite enviar más de un nombre con la misma conexión.
+
+Suponed que todas las llamadas relativas a los sockets (send, recv, accept, etc...) se realizan de forma correcta sin errores. No es necesario comprobarlos ni tratarlos.
+
+No es necesario comprobar los argumentos de entrada, se suponen correctos.
+
+Para comparar cadenas de caracteres se puede utilizar la función strcmp (cad1, cad2), la cual devuelve 0 en el caso en el que cad1 y cad2 sean iguales.
+
+Para copiar cadenas de texto, se puede utilizar la función strcpy (dest, src), la cual copia el contenido de la cadena src en dest.
+
+Se pide implementar tanto la aplicación cliente como la aplicación servidor, de forma que realice la funcionalidad anteriormente descrita.
+
+Fichero: types.h
+La siguiente porción de código se corresponde con el fichero types.h, el cual puede utilizarse para desarrollar los servicios pedidos:
+
+C
+#include <stdio.h>
+#include <pthread.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <sys/stat.h>
+#include <arpa/inet.h>
+#include <fcntl.h>
+
+// True
+#define TRUE 1
+
+// False
+#define FALSE 0
+
+// Code for a repeated name
+#define REPE 123
+
+// Code for a non-repeated name
+#define NO_REPE 456
+
+// Maximum number of names
+#define MAX_NAMES 5
+
+// Name length
+#define NAME_SIZE 128
+
+// Type for names
+typedef char tString[NAME_SIZE];
