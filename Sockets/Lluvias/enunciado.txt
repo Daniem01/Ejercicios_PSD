@@ -1,0 +1,32 @@
+# Enunciado del Ejercicio: Sockets - Lluvias (Raining Measures)
+
+La empresa Raining Measures está desarrollando un producto que monitoriza la cantidad de agua producida por las lluvias en entornos rurales. La idea es desplegar varios sensores (clientes) que se encargan de obtener los datos. Cada cliente recoge MAX_LENGTH medidas diarias - en litros por metro cuadrado (l/m²) - las cuales son enviadas al final de cada día al servidor.
+
+Nos piden implementar - únicamente la parte del servidor, utilizando sockets en lenguaje C, de forma que gestione estas medidas según se describe a continuación.
+
+La parte servidor recibirá los siguientes datos por parte de cada cliente: un identificador (ID) y las medidas tomadas por el sensor. Este ID será una cadena de caracteres con una longitud máxima de MAX_CHAR elementos. Los valores leídos por el sensor pueden tener decimales. Una vez se hayan recibido estos datos por parte del cliente, se enviará un código de confirmación al mismo (OK).
+
+El servidor deberá almacenar la siguiente información:
+* Valor máximo procesado desde que se inició el servidor y el ID del sensor que ha leído este dato.
+* Valor mínimo procesado desde que se inició el servidor y el ID del sensor que ha leído este dato.
+* Número total de medidas procesadas.
+
+Una vez el servidor ha procesado la información recibida por un cliente, deberá imprimir una línea mostrando esta información.
+
+Tened en cuenta que el servidor puede recibir peticiones de los clientes de forma concurrente.
+
+La ejecución del programa servidor se realizará de la siguiente forma:
+
+./server port
+
+donde port es el puerto donde el servidor escuchará las peticiones de los clientes.
+
+Las bibliotecas necesarias y la definición de los códigos se encuentran en el fichero types.h al final de este enunciado.
+
+## Consideraciones de implementación:
+
+* El servidor se ejecuta de forma indefinida.
+* El servidor debe procesar peticiones de los clientes de forma paralela.
+* Las medidas leídas por los sensores están en el intervalo [0.0 - MAX_VALUE].
+* Suponed que todas las llamadas relativas a los sockets (send, recv, accept, etc.) se realizan de forma correcta sin errores. No es necesario comprobarlos ni tratarlos.
+* No es necesario comprobar los argumentos de entrada, se suponen correctos. Por ejemplo, se supone que port es un número entero.
