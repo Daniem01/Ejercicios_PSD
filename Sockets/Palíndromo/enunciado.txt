@@ -1,0 +1,25 @@
+# Enunciado del Ejercicio: Sockets - Palíndromo
+
+Implementad un servicio que, utilizando sockets en lenguaje C, calcule si una palabra es un palíndromo, es decir, que se lee igual en ambos sentidos. Las bibliotecas necesarias y la definición de los códigos se encuentran en el fichero types.h al final de este enunciado.
+
+Inicialmente, el cliente que desee utilizar este servicio deberá conectarse con el servidor. Una vez realizada la conexión, el cliente deberá enviar al servidor una cadena de caracteres. Para ello, se enviará inicialmente un número entero que indique la longitud en número de caracteres de la cadena de caracteres, seguido de la propia cadena.
+
+El servidor, después de realizar los cálculos oportunos, enviará al cliente el código ESPALIN, si la palabra recibida es un palíndromo, o NOESPALIN, en otro caso.
+
+## Consideraciones de implementación:
+
+* Para el envío y recepción de los códigos se pueden utilizar números enteros.
+* El servidor debe ejecutarse indefinidamente.
+* El servidor debe procesar peticiones de los clientes de forma paralela.
+* Una vez el cliente finaliza la ejecución de un servicio, cerrará la conexión con el cliente.
+* Cada vez que un cliente requiera un servicio, deberá establecer conexión con el servidor. Es decir, no se permite solicitar más de un servicio con la misma conexión.
+* Suponed que todas las llamadas relativas a los sockets (send, recv, accept, etc.) se realizan de forma correcta sin errores. No es necesario comprobarlos ni tratarlos.
+* No es necesario comprobar los argumentos de entrada, se suponen correctos.
+
+La ejecución del programa servidor se realizará de la siguiente forma:
+
+./server port
+
+donde port es el puerto donde el servidor escuchará las peticiones de los clientes.
+
+Se pide implementar únicamente el programa servidor, de forma que realice la funcionalidad anteriormente descrita.

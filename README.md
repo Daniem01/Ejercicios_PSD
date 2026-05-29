@@ -12,7 +12,9 @@ El repositorio está estructurado en base a las principales tecnologías de sist
 
 ### 🔌 1. Sockets
 Comunicación a bajo nivel mediante el paso de mensajes utilizando el API de Sockets (TCP/UDP) bajo el estándar POSIX.
-*   ✅ **[Numeros](./Sockets/Numeros):**
+*   ✅ **[Numeros](./Sockets/Numeros)**
+*   ✅ **[Palíndromo](./Sockets/Palíndromo)**
+*   ✅ **[LLuvias](.Sockets/Lluvias)**
 *   ⏳ *Más ejercicios en desarrollo...*
 
 ### 🛠️ 2. RPC (Remote Procedure Call)
@@ -33,7 +35,7 @@ Estándar de paso de mensajes diseñado para la computación paralela y de alto 
 
 *   **Lenguajes:** C / C++ *(principalmente)*
 *   **Sistema Operativo:** Linux (Fedora / GNOME)
-*   **Compilador:** GCC / G++
+*   **Compilador:** GCC / G++ / makefile
 
 ---
 
