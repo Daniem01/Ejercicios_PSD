@@ -23,6 +23,7 @@ Llamadas a procedimientos remotos para abstraer la comunicación y simular ejecu
 
 ### 🕸️ 3. SOAP (Web Services)
 Servicios web basados en XML para el intercambio de información estructurada en entornos heterogéneos.
+*   ✅ **[Orden Remoto](.SOAP/Orden_Remoto)**
 *   ⏳ *Próximamente...*
 
 ### 🚀 4. MPI (Message Passing Interface)

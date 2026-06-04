@@ -1,0 +1,32 @@
+================================================================================
+                SERVICIO WEB (WEB SERVICES) - ORDEN REMOTO
+================================================================================
+
+En los laboratorios de la facultad de Informática necesitan desarrollar un servicio Web, llamado ordenRemoto, 
+que realice distintas operaciones sobre un vector de números. 
+Básicamente, el servicio debe proporcionar tres operaciones: 
+obtener el número mayor de un vector, calcular si un determinado vector está ordenado de forma creciente, y ordenar un vector de forma creciente.
+
+Tanto la parte cliente, como la parte servidor, estarán escritos en C utilizando gSoap.
+
+--------------------------------------------------------------------------
+
+SE PIDE:
+
+a) Implementar en el servidor la función ordenRemoto_ns__calculateMax, que recibe un vector de tipo ordenRemoto_ns__tVector y devuelve el número mayor de este vector.
+
+b) Implementar en el servidor la función ordenRemoto_ns__calculateSorted, que recibe un vector de tipo ordenRemoto_ns__tVector y devuelve SORTED si el vector está ordenado de forma creciente, o NOT_SORTED en otro caso.
+
+c) Implementar en el servidor la función ordenRemoto_ns__sort, que recibe un vector de tipo ordenRemoto_ns__tVector y devuelve un vector, del mismo tipo, ordenado de forma ascendente.
+
+d) Implementar la parte cliente para que utilice el servicio descrito. La invocación se realizará de la siguiente forma:
+
+   ./client http://server:port operation
+
+   donde:
+   - server es la dirección del servidor.
+   - port es el puerto donde escucha peticiones el servidor.
+   - operation es el nombre de la operación realizada sobre el vector. Se puede considerar:
+     * "max" para obtener el número mayor del vector (apartado a).
+     * "isSorted" para calcular si el vector está ordenado de forma creciente (apartado b).
+     * "sort" para ordenar un vector (apartado c).
