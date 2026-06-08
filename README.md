@@ -28,6 +28,7 @@ Servicios web basados en XML para el intercambio de información estructurada en
 
 ### 🚀 4. MPI (Message Passing Interface)
 Estándar de paso de mensajes diseñado para la computación paralela y de alto rendimiento.
+*   ✅ **[Divisible](.MPI/Divisible)**
 *   ⏳ *Próximamente...*
 
 ---
