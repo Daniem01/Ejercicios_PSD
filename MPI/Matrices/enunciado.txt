@@ -1,0 +1,60 @@
+===============================================================================
+MULTIPLICACIÓN DE MATRICES EN PARALELO (MPI)
+===============================================================================
+
+1. DESCRIPCIÓN GENERAL
+-------------------------------------------------------------------------------
+El objetivo es realizar el cómputo necesario para multiplicar dos matrices 
+cuadradas de forma paralela utilizando el entorno MPI. El sistema se 
+compone de 1 proceso MASTER (distribución/recepción) y múltiples procesos 
+WORKER (cómputo).
+
+2. CONSTANTES Y ESTRUCTURAS DE DATOS
+-------------------------------------------------------------------------------
+* SIZE: 1000 (Tamaño de la matriz cuadrada, 1000x1000).
+* MAX_INT_NUMBER: 10 (Valor máximo aleatorio para los elementos).
+* tMatrix: Tipo de datos que representa la matriz. Para evitar desbordamientos 
+  de pila (Stack Overflow) debido al tamaño (1.000.000 de enteros), se debe 
+  implementar como un array aplanado unidimensional asignado en memoria dinámica 
+  (malloc/free).
+
+Variables principales en el MASTER:
+* matrixA: Primera matriz a multiplicar.
+* matrixB: Segunda matriz a multiplicar.
+* matrixC: Matriz resultante que almacena el producto.
+
+Función de generación de datos:
+* void generateMatrix(tMatrix matrix): Rellena el array unidimensional con 
+  valores aleatorios empleando la operación módulo: matrix[i] = rand() % MAX_INT_NUMBER.
+
+3. REQUISITOS DEL ALGORITMO DINÁMICO (BAJO DEMANDA)
+-------------------------------------------------------------------------------
+El proceso MASTER debe repartir las porciones de datos de la matrizA de forma 
+dinámica a los WORKERS a medida que estos se vayan liberando. 
+Para maximizar la eficiencia de la red, la estrategia óptima consiste en:
+
+A) Difusión Inicial (Broadcast):
+   El MASTER clona la matrixB completa en todos los WORKERS al inicio del 
+   programa mediante una única llamada colectiva 'MPI_Bcast'.
+
+B) Reparto Fila a Fila (Grano = 1 Fila):
+   * Cada porción de trabajo equivale a 1 fila de la matrixA (SIZE elementos).
+   * El MASTER realiza un envío inicial de una fila a cada WORKER.
+   * El identificador o número de la fila se transmite codificado en el metadato 
+     'TAG' del mensaje para garantizar el orden.
+
+C) Bucle de Control en el MASTER (Bajo Demanda):
+   1. Recibe una fila calculada de la matrixC procedente de cualquier WORKER 
+      (MPI_ANY_SOURCE) con cualquier etiqueta (MPI_ANY_TAG).
+   2. Reconstruye la matrixC colocando la fila recibida en su índice matemático 
+      correcto usando el 'status.MPI_TAG' obtenido.
+   3. Si quedan filas pendientes por procesar: envía la siguiente fila de la 
+      matrixA al WORKER que se acaba de liberar.
+   4. Si no quedan filas: envía un mensaje especial con una señal de parada 
+      (por ejemplo, END_OF_PROCESSING = -1) para apagar al WORKER.
+
+D) Lógica del WORKER:
+   * Recibe la matrixB mediante el 'MPI_Bcast' inicial.
+   * Entra en un bucle de recepción pasiva de filas de la matrixA.
+   * Si detecta la señal de parada en los datos recibidos, aborta el bucle y finaliza.
+   * Si recibe una fila válida, calcula el producto escalar de dicha
